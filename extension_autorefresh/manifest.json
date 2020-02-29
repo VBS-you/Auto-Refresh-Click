@@ -1,0 +1,26 @@
+{
+    "manifest_version": 2,
+  
+    "name": " Refresh Plugin (trail )",
+    "description": "This extension asdented from GTmetrix. Written by D",
+    "version": "0.8.11",
+   
+  
+    "browser_action": {
+     "default_icon": "icon.png",
+     "default_popup": "popup.html"
+    },
+
+
+    "permissions": [
+     "tabs",
+     "activeTab",
+     "https://www.baichuanweb.com/produce/index",
+     "http://www.baichuanweb.com/produce/index"
+     ]
+
+     
+
+  }
+
+  
