@@ -2,7 +2,7 @@
 
 
 
-timeout=12000  //不建议低于6s
+timeout=11000  //不建议低于6s
 
 var onsetting
 var rstext
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 //slice 剩余题量：9
             })
   
-        }, 5000);
+        }, 3000);
         
         //pls make sure onsetting is not null
 
@@ -56,11 +56,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
                     if(rstext!=null && rstext!=onsetting[0]){  ///谨记onsetting为object，rstext为string
                         //console.log(rstext,onsetting)
-                        ringing(rstext)
+                        ringing(onsettext,rstext)
                         clearInterval(timehandler)
                     }; 
                 })
-            }, 3000);
+            }, 2000);
 
 
         }, timeout);
@@ -82,7 +82,7 @@ function sendcode(codenode) {
     chrome.tabs.executeScript(null, codenode) ; 
 
     
-    workingminute=Math.round((count-1)*timeout/6000)/10
+    workingminute=Math.round((count)*timeout/6000)/10
     str="刷新次数："+count+"\n工作时间："+workingminute+"分钟"
     document.getElementById("workingtimes").innerText=str;
 
@@ -91,30 +91,49 @@ function sendcode(codenode) {
 
 
 
-function ringing(rstext) {
+function ringing(onsettext,rstext) {
   
-    
-
-
-
-
     chrome.tabs.executeScript(null, codebtnclick) ; 
-
-    var NotifiAudio = new Audio(chrome.runtime.getURL("notification.mp3"));
-
     
+    
+
+
+
+
+
+  
+onsetnum=parseInt(onsettext.replace(/[^0-9]/g,""))
+
+rsnum=parseInt(rstext.replace(/[^0-9]/g,""))
+
+deff=rsnum-onsetnum
+
+
+
+notifinterval=2000
+if (deff<=0) {
+    var NotifiAudio = new Audio(chrome.runtime.getURL("start.wav"));    
+    
+
+} else{
+    var NotifiAudio = new Audio(chrome.runtime.getURL("notification.mp3"));  
+    notifinterval=(4/Math.log(deff**2+2)+0.6)*1000
+}
+
+
+
 setInterval(() => {
     NotifiAudio.play();
-}, 1200);
+}, notifinterval);
 
 
 
 
 
-    document.getElementById("workingtext").innerText=rstext;
+    document.getElementById("workingtext").innerText="题量变化为："+String(deff);
 
 
-    
 
 
 } 
+

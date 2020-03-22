@@ -3,7 +3,7 @@
   
     "name": " Refresh Plugin (trail )",
     "description": "This extension asdented from GTmetrix. Written by D",
-    "version": "0.8.11",
+    "version": "0.9.1",
    
   
     "browser_action": {
