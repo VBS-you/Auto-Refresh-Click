@@ -35,10 +35,11 @@ checkPageButton.addEventListener('click', function() {
             
             if (onsettext!=null) { //pls make sure onsetting is not null
                 
-            
-            document.getElementById("workingtext").innerText="原"+onsettext.slice(-7);
+            onsetnum=strip(onsettext) 
 
-            psnum=strip(onsettext) 
+            document.getElementById("workingtext").innerText="原始题量为："+ onsetnum ;
+
+            psnum=onsetnum 
         }
             //slice 剩余题量：9
         })
