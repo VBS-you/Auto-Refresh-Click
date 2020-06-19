@@ -6,9 +6,12 @@
 
 
 
-text=document.querySelector("#app > div.app-content.head-fixed > div > div.task-main > div > div.el-col.el-col-18 > div > div > div.the-task > div.task-msg > div.text-msg > div:nth-child(1)")
+text=document.querySelectorAll("div.text-msg")[1].childNodes[0]
 
-x=text.innerText
+if (text!=null) {
+    x=text.innerText
+}
+
 
 var myDate=new Date()
 

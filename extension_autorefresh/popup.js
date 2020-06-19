@@ -1,5 +1,5 @@
 
-
+//200619 针对页面升级（增加了“真题”），将inject及pressbtn依次挪位
 
 
 timeout=11000  //不建议低于6s
@@ -7,7 +7,7 @@ timeout=11000  //不建议低于6s
 var onsetting
 var rstext
 var count=1
-var psnum=99  // 确保即使没有读到prev num  后期也能正常预警 // test//  出现了“原始题量”空白
+// var psnum=99  // 确保即使没有读到prev num  后期也能正常预警 // test//  出现了“原始题量”空白 //还是不能正常预警
 
 codereadpage={file:"inject.js"}
 codegotohomepage= {code:"window.location.replace(\"http://www.baichuanweb.com/produce/index\")"};
@@ -23,7 +23,7 @@ var checkPageButton = document.getElementById('start');
 checkPageButton.addEventListener('click', function() {
 
 
-    checkPageButton.style.visibility="hidden"
+    checkPageButton.style.display="none" //改进了start.btn
 
     document.getElementById("workingstate").innerText="开始刷新：间隔"+timeout/1000+"秒";
 
@@ -40,7 +40,7 @@ checkPageButton.addEventListener('click', function() {
             document.getElementById("workingtext").innerText="原始题量为："+psnum;
 
 
-        }
+        }//else{alert("网络不佳。请刷新")}//会被挡住 无法点击 无法取消 
             //slice 剩余题量：9
         })
 
