@@ -27,7 +27,77 @@ checkPageButton.addEventListener('click', function() {
 
     document.getElementById("workingstate").innerText="开始刷新：间隔"+timeout/1000+"秒";
 
+    refresh_monitor_pages(1000)//初次点击 快速反应 1s
 
+
+}, false);
+}, false);
+
+
+
+function sendcode(codenode) {
+
+
+
+chrome.tabs.executeScript(null, codenode) ; 
+
+
+workingminute=Math.round((count)*timeout/6000)/10
+str="刷新次数："+count+"\n工作时间："+workingminute+"分钟"
+document.getElementById("workingtimes").innerText=str;
+
+count++;
+}
+
+
+
+function ringing(psnum,rsnum) {
+
+chrome.tabs.executeScript(null, codebtnclick) ; 
+
+
+deff=rsnum-psnum
+
+notifinterval=2000
+
+
+if (deff<=0) {
+var NotifiAudio = new Audio(chrome.runtime.getURL("start.wav"));    
+
+
+} else{
+var NotifiAudio = new Audio(chrome.runtime.getURL("notification.mp3"));  
+notifinterval=(4/Math.log(deff**2+2)+0.8)*1000
+}
+
+half_min=30*1000/notifinterval
+
+
+for (let index = 0; index < half_min; index++) {
+    setTimeout(() => {
+        NotifiAudio.play();
+        }, notifinterval*index);
+}
+
+
+
+
+
+document.getElementById("workingtext").innerText="题量变化为："+String(deff);
+
+setTimeout(() => {
+    document.getElementById("title").innerText="上一轮刷新了"+String(deff)+"题";
+    refresh_monitor_pages() //再召唤
+    }, notifinterval*half_min);
+
+
+
+} 
+
+
+
+function refresh_monitor_pages(first_refresh_lag=2400) {
+    
     sendcode(codegotohomepage)
     setTimeout(() => {
         chrome.tabs.executeScript(null, codereadpage, function(onsetting){ 
@@ -44,7 +114,7 @@ checkPageButton.addEventListener('click', function() {
             //slice 剩余题量：9
         })
 
-    }, 1000);
+    }, first_refresh_lag);
 
 
 
@@ -88,66 +158,7 @@ checkPageButton.addEventListener('click', function() {
 
 
 
-
-
-}, false);
-}, false);
-
-
-
-function sendcode(codenode) {
-
-
-
-chrome.tabs.executeScript(null, codenode) ; 
-
-
-workingminute=Math.round((count)*timeout/6000)/10
-str="刷新次数："+count+"\n工作时间："+workingminute+"分钟"
-document.getElementById("workingtimes").innerText=str;
-
-count++;
 }
-
-
-
-function ringing(psnum,rsnum) {
-
-chrome.tabs.executeScript(null, codebtnclick) ; 
-
-
-deff=rsnum-psnum
-
-notifinterval=2000
-
-
-if (deff<=0) {
-var NotifiAudio = new Audio(chrome.runtime.getURL("start.wav"));    
-
-
-} else{
-var NotifiAudio = new Audio(chrome.runtime.getURL("notification.mp3"));  
-notifinterval=(4/Math.log(deff**2+2)+0.8)*1000
-}
-
-
-
-setInterval(() => {
-NotifiAudio.play();
-}, notifinterval);
-
-
-
-
-
-document.getElementById("workingtext").innerText="题量变化为："+String(deff);
-
-
-
-
-} 
-
-
 
 
 function strip(text) {

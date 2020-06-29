@@ -4,6 +4,8 @@
 btn=document.querySelectorAll("div.btn-chose")[1].childNodes[0]  //child 确保选择的是按钮
 
 
+
+
 if (btn.innerText=="开始任务") {
     btn.click()
 }

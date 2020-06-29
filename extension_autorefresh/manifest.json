@@ -1,9 +1,9 @@
 {
     "manifest_version": 2,
   
-    "name": " Refresh Plugin (自动刷新点击)",
-    "description": "This extension asdented from GTmetrix. Written by D",
-    "version": "1.0.2",
+    "name": " Refresh Plugin (第二项自动刷新点击)",
+    "description": "响铃0.5min 无响应则继续自动刷新",
+    "version": "1.1.2",
    
   
     "browser_action": {
