@@ -1,6 +1,6 @@
 
 //200619 针对页面升级（增加了“真题”），将inject及pressbtn依次挪位
-
+//200630 响铃30s 之后自动重新开始工作
 
 timeout=11000  //不建议低于6s
 
@@ -73,7 +73,7 @@ notifinterval=(4/Math.log(deff**2+2)+0.8)*1000
 half_min=30*1000/notifinterval
 
 
-for (let index = 0; index < half_min; index++) {
+for (let index = 1; index < half_min; index++) { //修正index=0
     setTimeout(() => {
         NotifiAudio.play();
         }, notifinterval*index);
